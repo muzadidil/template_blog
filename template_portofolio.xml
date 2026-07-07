@@ -106,7 +106,20 @@
 
       <a class='group flex items-center gap-2 font-semibold tracking-tight' href='/'>
         <span class='grid h-8 w-8 place-items-center rounded-full bg-ink-950 text-sm font-bold text-white transition-transform group-hover:rotate-12 dark:bg-white dark:text-ink-950'>M</span>
-        <span class='text-sm text-ink-950 md:text-base dark:text-ink-50'>Muzadidil Fuad</span>
+        <span class='text-sm text-ink-950 md:text-base dark:text-ink-50'>
+          <b:section class='inline' id='brand-name' showaddelement='yes'>
+            <b:widget id='HTML1' locked='false' title='Nama/Brand' type='HTML' version='2'>
+              <b:widget-settings>
+                <b:widget-setting name='content'>Muzadidil Fuad</b:widget-setting>
+              </b:widget-settings>
+              <b:includable id='main'>
+                <div class='widget-content'>
+                  <data:content/>
+                </div>
+              </b:includable>
+            </b:widget>
+          </b:section>
+        </span>
       </a>
 
       <!-- Nav desktop -->
@@ -214,7 +227,7 @@
     </b:if>
 
     <!-- ===================== KONTEN HALAMAN (Tentang/Keahlian/Proyek/Kontak) ===================== -->
-    <b:section class='page-area relative z-10 block' id='main' preferred='yes'>
+    <b:section class='page-area relative z-10 block' id='main' preferred='yes' showaddelement='yes'>
       <b:widget id='Blog1' locked='true' title='Postingan Blog' type='Blog' version='1'>
         <b:widget-settings>
           <b:widget-setting name='showDateHeader'>false</b:widget-setting>
@@ -996,16 +1009,18 @@
       <div class='py-12 grid grid-cols-1 gap-10 sm:grid-cols-3'>
         <!-- Brand -->
         <div class='sm:col-span-1'>
-          <div class='flex items-center gap-3 mb-4'>
-            <span class='footer-logo-badge'>M</span>
-            <div>
-              <p class='font-bold text-ink-900 dark:text-white text-sm leading-tight'>Muzadidil Fuad</p>
-              <p class='footer-tagline'>Portfolio</p>
-            </div>
-          </div>
-          <p class='text-xs text-ink-400 dark:text-ink-500 leading-relaxed max-w-xs'>
-            Developer &amp; desainer kreatif yang bersemangat membangun pengalaman digital yang bermakna.
-          </p>
+          <b:section class='block' id='footer-brand' showaddelement='yes'>
+            <b:widget id='HTML2' locked='false' title='Profil Footer' type='HTML' version='2'>
+              <b:widget-settings>
+                <b:widget-setting name='content'>&lt;div class="flex items-center gap-3 mb-4"&gt;&lt;span class="footer-logo-badge"&gt;M&lt;/span&gt;&lt;div&gt;&lt;p class="font-bold text-ink-900 dark:text-white text-sm leading-tight"&gt;Muzadidil Fuad&lt;/p&gt;&lt;p class="footer-tagline"&gt;Portfolio&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;p class="text-xs text-ink-400 dark:text-ink-500 leading-relaxed max-w-xs"&gt;Developer &amp;amp; desainer kreatif yang bersemangat membangun pengalaman digital yang bermakna.&lt;/p&gt;</b:widget-setting>
+              </b:widget-settings>
+              <b:includable id='main'>
+                <div class='widget-content'>
+                  <data:content/>
+                </div>
+              </b:includable>
+            </b:widget>
+          </b:section>
         </div>
 
         <!-- Social / Contact -->
