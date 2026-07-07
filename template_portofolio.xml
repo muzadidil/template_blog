@@ -87,14 +87,6 @@
     @keyframes oceanDrift{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
     .ocean-bg::after{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%, transparent 35%, rgba(0,0,0,.6) 100%); }
     @media (prefers-reduced-motion: reduce){ .wave1,.wave2,.wave3{ animation:none !important; } }
-
-    /* Nav menu (widget LinkList bawaan Blogger, dirapikan jadi nav horizontal) */
-    .nav-menu-wrap .title{ display:none; }
-    .nav-menu-wrap ul{ display:flex; align-items:center; gap:2rem; list-style:none; margin:0; padding:0; }
-    .nav-menu-wrap li{ margin:0; padding:0; }
-    .nav-menu-wrap a{ color:inherit; text-decoration:none; transition:color .2s ease; }
-    .nav-menu-wrap a:hover{ color:#18181b; }
-    html.dark .nav-menu-wrap a:hover{ color:#fff; }
   ]]></b:skin>
 
   <b:include data='blog' name='all-head-content'/>
@@ -115,31 +107,28 @@
       <a class='group flex items-center gap-2 font-semibold tracking-tight' href='/'>
         <span class='grid h-8 w-8 place-items-center rounded-full bg-ink-950 text-sm font-bold text-white transition-transform group-hover:rotate-12 dark:bg-white dark:text-ink-950'>M</span>
         <span class='text-sm text-ink-950 md:text-base dark:text-ink-50'>
-          <b:section id='header-brand' maxwidgets='1' showaddelement='no'>
-            <b:widget id='HTML901' locked='false' title='Nama/Brand' type='HTML' version='2'>
+          <b:section class='inline' id='brand-name' showaddelement='yes'>
+            <b:widget id='HTML1' locked='false' title='Nama/Brand' type='HTML' version='2'>
               <b:widget-settings>
                 <b:widget-setting name='content'>Muzadidil Fuad</b:widget-setting>
               </b:widget-settings>
+              <b:includable id='main'>
+                <div class='widget-content'>
+                  <data:content/>
+                </div>
+              </b:includable>
             </b:widget>
           </b:section>
         </span>
       </a>
 
       <!-- Nav desktop -->
-      <nav class='nav-menu-wrap hidden items-center gap-8 text-sm text-ink-600 md:flex dark:text-ink-400' data-nav-desktop='true'>
-        <b:section id='header-menu' maxwidgets='1' showaddelement='no'>
-          <b:widget id='LinkList901' locked='false' title='Menu Navigasi' type='LinkList' version='2'>
-            <b:widget-settings>
-              <b:widget-setting name='sorting'>NO_SORT</b:widget-setting>
-              <b:widget-setting name='link-0'>/|Beranda</b:widget-setting>
-              <b:widget-setting name='link-1'>/p/tentang.html|Tentang</b:widget-setting>
-              <b:widget-setting name='link-2'>/p/keahlian.html|Keahlian</b:widget-setting>
-              <b:widget-setting name='link-3'>/p/proyek.html|Proyek</b:widget-setting>
-              <b:widget-setting name='link-4'>/p/kontak.html|Kontak</b:widget-setting>
-              <b:widget-setting name='count'>5</b:widget-setting>
-            </b:widget-settings>
-          </b:widget>
-        </b:section>
+      <nav class='hidden items-center gap-8 text-sm text-ink-600 md:flex dark:text-ink-400'>
+        <a class='transition hover:text-ink-950 dark:hover:text-white' data-nav='true' href='/'>Beranda</a>
+        <a class='transition hover:text-ink-950 dark:hover:text-white' data-nav='true' href='/p/tentang.html'>Tentang</a>
+        <a class='transition hover:text-ink-950 dark:hover:text-white' data-nav='true' href='/p/keahlian.html'>Keahlian</a>
+        <a class='transition hover:text-ink-950 dark:hover:text-white' data-nav='true' href='/p/proyek.html'>Proyek</a>
+        <a class='transition hover:text-ink-950 dark:hover:text-white' data-nav='true' href='/p/kontak.html'>Kontak</a>
       </nav>
 
       <div class='hidden items-center gap-3 md:flex'>
@@ -168,7 +157,11 @@
     <!-- Menu mobile -->
     <div class='hidden border-t border-ink-100 bg-white/95 backdrop-blur-xl md:hidden dark:border-ink-800 dark:bg-ink-950/95' data-mobile-menu='true'>
       <div class='mx-auto flex max-w-6xl flex-col gap-4 px-6 py-6 text-sm'>
-        <div class='flex flex-col gap-4' data-nav-mobile='true'/>
+        <a class='text-ink-700 dark:text-ink-300' href='/'>Beranda</a>
+        <a class='text-ink-700 dark:text-ink-300' href='/p/tentang.html'>Tentang</a>
+        <a class='text-ink-700 dark:text-ink-300' href='/p/keahlian.html'>Keahlian</a>
+        <a class='text-ink-700 dark:text-ink-300' href='/p/proyek.html'>Proyek</a>
+        <a class='text-ink-700 dark:text-ink-300' href='/p/kontak.html'>Kontak</a>
         <a class='mt-2 inline-flex items-center justify-center rounded-full bg-ink-950 px-5 py-2.5 text-white dark:bg-white dark:text-ink-950' href='/p/kontak.html'>Rekrut Saya</a>
       </div>
     </div>
@@ -1016,11 +1009,16 @@
       <div class='py-12 grid grid-cols-1 gap-10 sm:grid-cols-3'>
         <!-- Brand -->
         <div class='sm:col-span-1'>
-          <b:section id='footer-brand' maxwidgets='1' showaddelement='no'>
-            <b:widget id='HTML902' locked='false' title='Profil Footer' type='HTML' version='2'>
+          <b:section class='block' id='footer-brand' showaddelement='yes'>
+            <b:widget id='HTML2' locked='false' title='Profil Footer' type='HTML' version='2'>
               <b:widget-settings>
                 <b:widget-setting name='content'>&lt;div class="flex items-center gap-3 mb-4"&gt;&lt;span class="footer-logo-badge"&gt;M&lt;/span&gt;&lt;div&gt;&lt;p class="font-bold text-ink-900 dark:text-white text-sm leading-tight"&gt;Muzadidil Fuad&lt;/p&gt;&lt;p class="footer-tagline"&gt;Portfolio&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;p class="text-xs text-ink-400 dark:text-ink-500 leading-relaxed max-w-xs"&gt;Developer &amp;amp; desainer kreatif yang bersemangat membangun pengalaman digital yang bermakna.&lt;/p&gt;</b:widget-setting>
               </b:widget-settings>
+              <b:includable id='main'>
+                <div class='widget-content'>
+                  <data:content/>
+                </div>
+              </b:includable>
             </b:widget>
           </b:section>
         </div>
@@ -1083,17 +1081,6 @@
     var mb = document.querySelector('[data-menu-toggle]');
     var mm = document.querySelector('[data-mobile-menu]');
     if(mb && mm){ mb.addEventListener('click', function(){ mm.classList.toggle('hidden'); }); }
-
-    // Salin menu navigasi (widget LinkList) dari nav desktop ke menu mobile
-    var navDesktop = document.querySelector('[data-nav-desktop]');
-    var navMobile = document.querySelector('[data-nav-mobile]');
-    if(navDesktop && navMobile){
-      navDesktop.querySelectorAll('li a').forEach(function(a){
-        var clone = a.cloneNode(true);
-        clone.className = 'text-ink-700 dark:text-ink-300';
-        navMobile.appendChild(clone);
-      });
-    }
 
     var hdr = document.querySelector('[data-header]');
     if(hdr){
