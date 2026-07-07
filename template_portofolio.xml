@@ -87,6 +87,19 @@
     @keyframes oceanDrift{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
     .ocean-bg::after{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%, transparent 35%, rgba(0,0,0,.6) 100%); }
     @media (prefers-reduced-motion: reduce){ .wave1,.wave2,.wave3{ animation:none !important; } }
+
+    /* Sidebar label proyek (widget Label bawaan Blogger, dirapikan) */
+    .proyek-label-sidebar .widget.Label .title{ display:none; }
+    .proyek-label-sidebar ul{ display:flex; flex-wrap:wrap; gap:.5rem; list-style:none; margin:0; padding:0; }
+    .proyek-label-sidebar li{ margin:0; }
+    .proyek-label-sidebar a{
+      display:inline-flex; align-items:center; gap:.35rem;
+      padding:.4rem .9rem; border-radius:9999px; font-size:.8rem;
+      border:1px solid #e4e4e7; color:#52525b; text-decoration:none; transition:.15s ease;
+    }
+    .proyek-label-sidebar a:hover{ border-color:#a1a1aa; color:#18181b; }
+    html.dark .proyek-label-sidebar a{ border-color:#3f3f46; color:#a1a1aa; }
+    html.dark .proyek-label-sidebar a:hover{ border-color:#71717a; color:#fff; }
   ]]></b:skin>
 
   <b:include data='blog' name='all-head-content'/>
@@ -107,16 +120,11 @@
       <a class='group flex items-center gap-2 font-semibold tracking-tight' href='/'>
         <span class='grid h-8 w-8 place-items-center rounded-full bg-ink-950 text-sm font-bold text-white transition-transform group-hover:rotate-12 dark:bg-white dark:text-ink-950'>M</span>
         <span class='text-sm text-ink-950 md:text-base dark:text-ink-50'>
-          <b:section class='inline' id='brand-name' showaddelement='yes'>
-            <b:widget id='HTML1' locked='false' title='Nama/Brand' type='HTML' version='2'>
+          <b:section id='header-brand' maxwidgets='1' showaddelement='no'>
+            <b:widget id='HTML901' locked='false' title='Nama/Brand' type='HTML' version='2'>
               <b:widget-settings>
                 <b:widget-setting name='content'>Muzadidil Fuad</b:widget-setting>
               </b:widget-settings>
-              <b:includable id='main'>
-                <div class='widget-content'>
-                  <data:content/>
-                </div>
-              </b:includable>
             </b:widget>
           </b:section>
         </span>
@@ -998,6 +1006,22 @@
       </div>
     </b:if>
 
+    <!-- Sidebar filter label untuk halaman Proyek (widget Label bawaan Blogger) -->
+    <b:if cond='data:view.url.path == &quot;/p/proyek.html&quot;'>
+      <div class='proyek-label-sidebar relative z-10 mx-auto max-w-6xl px-6 pb-16 lg:px-10'>
+        <b:section id='proyek-labels' name='Filter Label Proyek' showaddelement='yes'>
+          <b:widget id='Label901' locked='false' title='Filter' type='Label' version='2'>
+            <b:widget-settings>
+              <b:widget-setting name='sorting'>ALPHA</b:widget-setting>
+              <b:widget-setting name='display'>LIST</b:widget-setting>
+              <b:widget-setting name='showType'>ALL</b:widget-setting>
+              <b:widget-setting name='showFreqNumbers'>true</b:widget-setting>
+            </b:widget-settings>
+          </b:widget>
+        </b:section>
+      </div>
+    </b:if>
+
   <!-- ===================== FOOTER ===================== -->
   <footer class='footer-redesign relative z-10 border-t border-white/5 bg-gray-50 dark:bg-transparent'>
     <!-- Glow effects -->
@@ -1009,16 +1033,11 @@
       <div class='py-12 grid grid-cols-1 gap-10 sm:grid-cols-3'>
         <!-- Brand -->
         <div class='sm:col-span-1'>
-          <b:section class='block' id='footer-brand' showaddelement='yes'>
-            <b:widget id='HTML2' locked='false' title='Profil Footer' type='HTML' version='2'>
+          <b:section id='footer-brand' maxwidgets='1' showaddelement='no'>
+            <b:widget id='HTML902' locked='false' title='Profil Footer' type='HTML' version='2'>
               <b:widget-settings>
                 <b:widget-setting name='content'>&lt;div class="flex items-center gap-3 mb-4"&gt;&lt;span class="footer-logo-badge"&gt;M&lt;/span&gt;&lt;div&gt;&lt;p class="font-bold text-ink-900 dark:text-white text-sm leading-tight"&gt;Muzadidil Fuad&lt;/p&gt;&lt;p class="footer-tagline"&gt;Portfolio&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;p class="text-xs text-ink-400 dark:text-ink-500 leading-relaxed max-w-xs"&gt;Developer &amp;amp; desainer kreatif yang bersemangat membangun pengalaman digital yang bermakna.&lt;/p&gt;</b:widget-setting>
               </b:widget-settings>
-              <b:includable id='main'>
-                <div class='widget-content'>
-                  <data:content/>
-                </div>
-              </b:includable>
             </b:widget>
           </b:section>
         </div>
@@ -1240,57 +1259,6 @@
       return a;
     }
 
-    function buildSidebar(entries){
-      var side=document.getElementById('proyek-filter');
-      if(!side) return;
-      var all={};
-      for(var i=0;i<entries.length;i++){
-        var tags=getTags(entries[i]);
-        for(var j=0;j<tags.length;j++){ all[tags[j]]=true; }
-      }
-      var names=Object.keys(all).sort();
-      side.innerHTML='';
-
-      var allBtn=document.createElement('button');
-      allBtn.type='button';
-      allBtn[C+'Name']='proyek-filter-btn is-active';
-      allBtn.textContent='Semua';
-      allBtn.setAttribute('data-filter','');
-      side.appendChild(allBtn);
-
-      for(var k=0;k<names.length;k++){
-        var btn=document.createElement('button');
-        btn.type='button';
-        btn[C+'Name']='proyek-filter-btn';
-        btn.textContent=names[k];
-        btn.setAttribute('data-filter', names[k].toLowerCase());
-        side.appendChild(btn);
-      }
-
-      side.querySelectorAll('.proyek-filter-btn').forEach(function(b){
-        b.addEventListener('click', function(){
-          side.querySelectorAll('.proyek-filter-btn').forEach(function(x){ x.classList.remove('is-active'); });
-          this.classList.add('is-active');
-          applyFilter(this.getAttribute('data-filter'));
-        });
-      });
-    }
-
-    function applyFilter(tag){
-      var grid=document.getElementById('proyek-grid');
-      var countEl=document.getElementById('proyek-count');
-      if(!grid) return;
-      var cards=grid.querySelectorAll('.proyek-card');
-      var visible=0;
-      cards.forEach(function(card){
-        var tags=(card.getAttribute('data-tags')||'').split('|');
-        var show=!tag || tags.indexOf(tag)!==-1;
-        card.style.display=show?'':'none';
-        if(show) visible++;
-      });
-      if(countEl) countEl.textContent=visible+' Proyek';
-    }
-
     window.renderProyek=function(data){
       var grid=document.getElementById('proyek-grid');
       var countEl=document.getElementById('proyek-count');
@@ -1309,7 +1277,6 @@
       for(var i=0;i<entries.length;i++){
         grid.appendChild(makeCard(entries[i]));
       }
-      buildSidebar(entries);
     };
 
     var s=document.createElement('script');
