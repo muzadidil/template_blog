@@ -1010,20 +1010,18 @@
     </b:if>
 
     <!-- Sidebar filter label untuk halaman Proyek (widget Label bawaan Blogger) -->
-    <b:if cond='data:view.url.path == &quot;/p/proyek.html&quot;'>
-      <div class='proyek-label-sidebar relative z-10 mx-auto max-w-6xl px-6 pb-16 lg:px-10'>
-        <b:section id='proyek-labels' name='Filter Label Proyek' showaddelement='yes'>
-          <b:widget id='Label901' locked='false' title='Filter' type='Label' version='2'>
-            <b:widget-settings>
-              <b:widget-setting name='sorting'>ALPHA</b:widget-setting>
-              <b:widget-setting name='display'>LIST</b:widget-setting>
-              <b:widget-setting name='showType'>ALL</b:widget-setting>
-              <b:widget-setting name='showFreqNumbers'>true</b:widget-setting>
-            </b:widget-settings>
-          </b:widget>
-        </b:section>
-      </div>
-    </b:if>
+    <div expr:class='data:view.url.path == &quot;/p/proyek.html&quot; ? &quot;proyek-label-sidebar relative z-10 mx-auto max-w-6xl px-6 pb-16 lg:px-10&quot; : &quot;hidden&quot;'>
+      <b:section id='proyek-labels' name='Filter Label Proyek' showaddelement='yes'>
+        <b:widget id='Label901' locked='false' title='Filter' type='Label' version='2'>
+          <b:widget-settings>
+            <b:widget-setting name='sorting'>ALPHA</b:widget-setting>
+            <b:widget-setting name='display'>LIST</b:widget-setting>
+            <b:widget-setting name='showType'>ALL</b:widget-setting>
+            <b:widget-setting name='showFreqNumbers'>true</b:widget-setting>
+          </b:widget-settings>
+        </b:widget>
+      </b:section>
+    </div>
 
   <!-- ===================== FOOTER ===================== -->
   <footer class='footer-redesign relative z-10 border-t border-white/5 bg-gray-50 dark:bg-transparent'>
