@@ -100,6 +100,9 @@
     .proyek-label-sidebar a:hover{ border-color:#a1a1aa; color:#18181b; }
     html.dark .proyek-label-sidebar a{ border-color:#3f3f46; color:#a1a1aa; }
     html.dark .proyek-label-sidebar a:hover{ border-color:#71717a; color:#fff; }
+
+    /* Sembunyikan judul widget bawaan (Nama/Brand, Profil Footer) */
+    #header-brand .title, #footer-brand .title{ display:none; }
   ]]></b:skin>
 
   <b:include data='blog' name='all-head-content'/>
