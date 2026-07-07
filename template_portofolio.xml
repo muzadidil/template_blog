@@ -726,7 +726,7 @@
               </div>
             </div>
           <b:else/>
-            <div class='mx-auto max-w-3xl px-6 pb-8 pt-24 lg:px-10'>
+            <div expr:class='(data:view.url.path == &quot;/p/kontak.html&quot; ? &quot;max-w-5xl&quot; : &quot;max-w-3xl&quot;) + &quot; mx-auto px-6 pb-8 pt-24 lg:px-10&quot;'>
               <article class='page-body reveal is-visible'>
                 <data:post.body/>
               </article>
