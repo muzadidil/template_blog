@@ -1167,8 +1167,13 @@
       for(var i=0,l=e.link||[];i<l.length;i++){if(l[i].rel==='alternate')return l[i].href;}
       return '#';
     }
-    function getCat(e){
-      return ((e.category||[{term:'Proyek'}])[0]).term;
+    function getTags(e){
+      var cats=e.category||[];
+      var tags=[];
+      for(var i=0;i<cats.length;i++){
+        if(cats[i].term && cats[i].term!=='Proyek') tags.push(cats[i].term);
+      }
+      return tags;
     }
 
     function makeCard(e){
@@ -1177,11 +1182,13 @@
       var thumb=getThumb(e);
       var desc=getDesc(e);
       var date=e.published?fmtDate(e.published['$t']):'';
-      var cat=getCat(e);
+      var tags=getTags(e);
+      var cat=tags.length?tags[0]:'Proyek';
 
       var a=document.createElement('a');
       a.href=url;
       a[C+'Name']='proyek-card';
+      a.setAttribute('data-tags', tags.join('|').toLowerCase());
       a.target='_blank';
 
       // Image
@@ -1233,6 +1240,57 @@
       return a;
     }
 
+    function buildSidebar(entries){
+      var side=document.getElementById('proyek-filter');
+      if(!side) return;
+      var all={};
+      for(var i=0;i<entries.length;i++){
+        var tags=getTags(entries[i]);
+        for(var j=0;j<tags.length;j++){ all[tags[j]]=true; }
+      }
+      var names=Object.keys(all).sort();
+      side.innerHTML='';
+
+      var allBtn=document.createElement('button');
+      allBtn.type='button';
+      allBtn[C+'Name']='proyek-filter-btn is-active';
+      allBtn.textContent='Semua';
+      allBtn.setAttribute('data-filter','');
+      side.appendChild(allBtn);
+
+      for(var k=0;k<names.length;k++){
+        var btn=document.createElement('button');
+        btn.type='button';
+        btn[C+'Name']='proyek-filter-btn';
+        btn.textContent=names[k];
+        btn.setAttribute('data-filter', names[k].toLowerCase());
+        side.appendChild(btn);
+      }
+
+      side.querySelectorAll('.proyek-filter-btn').forEach(function(b){
+        b.addEventListener('click', function(){
+          side.querySelectorAll('.proyek-filter-btn').forEach(function(x){ x.classList.remove('is-active'); });
+          this.classList.add('is-active');
+          applyFilter(this.getAttribute('data-filter'));
+        });
+      });
+    }
+
+    function applyFilter(tag){
+      var grid=document.getElementById('proyek-grid');
+      var countEl=document.getElementById('proyek-count');
+      if(!grid) return;
+      var cards=grid.querySelectorAll('.proyek-card');
+      var visible=0;
+      cards.forEach(function(card){
+        var tags=(card.getAttribute('data-tags')||'').split('|');
+        var show=!tag || tags.indexOf(tag)!==-1;
+        card.style.display=show?'':'none';
+        if(show) visible++;
+      });
+      if(countEl) countEl.textContent=visible+' Proyek';
+    }
+
     window.renderProyek=function(data){
       var grid=document.getElementById('proyek-grid');
       var countEl=document.getElementById('proyek-count');
@@ -1251,6 +1309,7 @@
       for(var i=0;i<entries.length;i++){
         grid.appendChild(makeCard(entries[i]));
       }
+      buildSidebar(entries);
     };
 
     var s=document.createElement('script');
