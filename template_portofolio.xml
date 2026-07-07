@@ -104,19 +104,18 @@
   <header class='fixed inset-x-0 top-0 z-50 bg-transparent' data-header='true'>
     <div class='mx-auto flex max-w-6xl items-center justify-between px-6 py-4 lg:px-10'>
 
-      <b:section class='group flex items-center gap-2 font-semibold tracking-tight' id='header-brand' maxwidgets='1' showaddelement='no'>
-        <b:widget id='HTML901' locked='false' title='Nama/Brand' type='HTML' version='2'>
-          <b:widget-settings>
-            <b:widget-setting name='content'>Muzadidil Fuad</b:widget-setting>
-          </b:widget-settings>
-          <b:includable id='main'>
-            <a class='group flex items-center gap-2 font-semibold tracking-tight' href='/'>
-              <span class='grid h-8 w-8 place-items-center rounded-full bg-ink-950 text-sm font-bold text-white transition-transform group-hover:rotate-12 dark:bg-white dark:text-ink-950'>M</span>
-              <span class='text-sm text-ink-950 md:text-base dark:text-ink-50'><data:content/></span>
-            </a>
-          </b:includable>
-        </b:widget>
-      </b:section>
+      <a class='group flex items-center gap-2 font-semibold tracking-tight' href='/'>
+        <span class='grid h-8 w-8 place-items-center rounded-full bg-ink-950 text-sm font-bold text-white transition-transform group-hover:rotate-12 dark:bg-white dark:text-ink-950'>M</span>
+        <span class='text-sm text-ink-950 md:text-base dark:text-ink-50'>
+          <b:section id='header-brand' maxwidgets='1' showaddelement='no'>
+            <b:widget id='HTML901' locked='false' title='Nama/Brand' type='HTML' version='2'>
+              <b:widget-settings>
+                <b:widget-setting name='content'>Muzadidil Fuad</b:widget-setting>
+              </b:widget-settings>
+            </b:widget>
+          </b:section>
+        </span>
+      </a>
 
       <!-- Nav desktop -->
       <nav class='hidden items-center gap-8 text-sm text-ink-600 md:flex dark:text-ink-400' data-nav-desktop='true'>
@@ -1014,16 +1013,11 @@
       <div class='py-12 grid grid-cols-1 gap-10 sm:grid-cols-3'>
         <!-- Brand -->
         <div class='sm:col-span-1'>
-          <b:section class='block' id='footer-brand' maxwidgets='1' showaddelement='no'>
+          <b:section id='footer-brand' maxwidgets='1' showaddelement='no'>
             <b:widget id='HTML902' locked='false' title='Profil Footer' type='HTML' version='2'>
               <b:widget-settings>
                 <b:widget-setting name='content'>&lt;div class="flex items-center gap-3 mb-4"&gt;&lt;span class="footer-logo-badge"&gt;M&lt;/span&gt;&lt;div&gt;&lt;p class="font-bold text-ink-900 dark:text-white text-sm leading-tight"&gt;Muzadidil Fuad&lt;/p&gt;&lt;p class="footer-tagline"&gt;Portfolio&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;p class="text-xs text-ink-400 dark:text-ink-500 leading-relaxed max-w-xs"&gt;Developer &amp;amp; desainer kreatif yang bersemangat membangun pengalaman digital yang bermakna.&lt;/p&gt;</b:widget-setting>
               </b:widget-settings>
-              <b:includable id='main'>
-                <div class='widget-content'>
-                  <data:content/>
-                </div>
-              </b:includable>
             </b:widget>
           </b:section>
         </div>
