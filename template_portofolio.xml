@@ -123,12 +123,25 @@
       </a>
 
       <!-- Nav desktop -->
-      <nav class='hidden items-center gap-8 text-sm text-ink-600 md:flex dark:text-ink-400'>
-        <a class='transition hover:text-ink-950 dark:hover:text-white' data-nav='true' href='/'>Beranda</a>
-        <a class='transition hover:text-ink-950 dark:hover:text-white' data-nav='true' href='/p/tentang.html'>Tentang</a>
-        <a class='transition hover:text-ink-950 dark:hover:text-white' data-nav='true' href='/p/keahlian.html'>Keahlian</a>
-        <a class='transition hover:text-ink-950 dark:hover:text-white' data-nav='true' href='/p/proyek.html'>Proyek</a>
-        <a class='transition hover:text-ink-950 dark:hover:text-white' data-nav='true' href='/p/kontak.html'>Kontak</a>
+      <nav class='hidden items-center gap-8 text-sm text-ink-600 md:flex dark:text-ink-400' data-nav-desktop='true'>
+        <b:section class='inline' id='main-menu' showaddelement='yes'>
+          <b:widget id='LinkList1' locked='false' title='Menu Navigasi' type='LinkList' version='2'>
+            <b:widget-settings>
+              <b:widget-setting name='sorting'>NO_SORT</b:widget-setting>
+              <b:widget-setting name='link-0'>/|Beranda</b:widget-setting>
+              <b:widget-setting name='link-1'>/p/tentang.html|Tentang</b:widget-setting>
+              <b:widget-setting name='link-2'>/p/keahlian.html|Keahlian</b:widget-setting>
+              <b:widget-setting name='link-3'>/p/proyek.html|Proyek</b:widget-setting>
+              <b:widget-setting name='link-4'>/p/kontak.html|Kontak</b:widget-setting>
+              <b:widget-setting name='count'>5</b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main'>
+              <b:loop values='data:links' var='link'>
+                <a class='transition hover:text-ink-950 dark:hover:text-white' data-nav='true' expr:href='data:link.target'><data:link.name/></a>
+              </b:loop>
+            </b:includable>
+          </b:widget>
+        </b:section>
       </nav>
 
       <div class='hidden items-center gap-3 md:flex'>
@@ -157,11 +170,7 @@
     <!-- Menu mobile -->
     <div class='hidden border-t border-ink-100 bg-white/95 backdrop-blur-xl md:hidden dark:border-ink-800 dark:bg-ink-950/95' data-mobile-menu='true'>
       <div class='mx-auto flex max-w-6xl flex-col gap-4 px-6 py-6 text-sm'>
-        <a class='text-ink-700 dark:text-ink-300' href='/'>Beranda</a>
-        <a class='text-ink-700 dark:text-ink-300' href='/p/tentang.html'>Tentang</a>
-        <a class='text-ink-700 dark:text-ink-300' href='/p/keahlian.html'>Keahlian</a>
-        <a class='text-ink-700 dark:text-ink-300' href='/p/proyek.html'>Proyek</a>
-        <a class='text-ink-700 dark:text-ink-300' href='/p/kontak.html'>Kontak</a>
+        <div class='flex flex-col gap-4' data-nav-mobile='true'/>
         <a class='mt-2 inline-flex items-center justify-center rounded-full bg-ink-950 px-5 py-2.5 text-white dark:bg-white dark:text-ink-950' href='/p/kontak.html'>Rekrut Saya</a>
       </div>
     </div>
@@ -1081,6 +1090,17 @@
     var mb = document.querySelector('[data-menu-toggle]');
     var mm = document.querySelector('[data-mobile-menu]');
     if(mb && mm){ mb.addEventListener('click', function(){ mm.classList.toggle('hidden'); }); }
+
+    // Salin menu navigasi (widget LinkList) dari nav desktop ke menu mobile
+    var navDesktop = document.querySelector('[data-nav-desktop]');
+    var navMobile = document.querySelector('[data-nav-mobile]');
+    if(navDesktop && navMobile){
+      navDesktop.querySelectorAll('a[data-nav]').forEach(function(a){
+        var clone = a.cloneNode(true);
+        clone.className = 'text-ink-700 dark:text-ink-300';
+        navMobile.appendChild(clone);
+      });
+    }
 
     var hdr = document.querySelector('[data-header]');
     if(hdr){
